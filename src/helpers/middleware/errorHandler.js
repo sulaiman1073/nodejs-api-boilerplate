@@ -8,6 +8,7 @@ const {
   MulterErrorHandler
 } = require("../errorHandlers");
 
+// eslint-disable-next-line no-unused-vars
 module.exports = async (err, req, res, next) => {
   req.err = err;
 

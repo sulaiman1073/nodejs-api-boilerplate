@@ -1,6 +1,7 @@
 const { REGISTRATION_EMAIL, VERIFICATION_EMAIL } = require("./queues");
 const sendRegistrationEmailWork = require("./work/sendRegistrationEmail");
 const sendVerificationEmailWork = require("./work/sendVerificationEmail");
+const logger = require("../config/logger");
 
 let channel;
 
@@ -25,10 +26,10 @@ const subscribe = async (conn, queue, work) => {
 
     channel.on("error", async err => {
       await conn.close();
-      console.error(err);
+      logger.error(err);
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 };
 

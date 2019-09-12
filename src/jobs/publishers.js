@@ -1,5 +1,6 @@
 const conn = require("../config/amqp");
 const { REGISTRATION_EMAIL, VERIFICATION_EMAIL } = require("./queues");
+const logger = require("../config/logger");
 
 let channel = null;
 
@@ -12,7 +13,7 @@ const publish = async (queue, job) => {
       channel.on("error", async err => {
         channel = null;
         await conn.close();
-        console.error(err);
+        logger.error(err);
       });
 
       channel.on("close", () => {
@@ -24,7 +25,7 @@ const publish = async (queue, job) => {
       persistent: true
     });
   } catch (error) {
-    console.error(error);
+    logger.error(error);
   }
 };
 
